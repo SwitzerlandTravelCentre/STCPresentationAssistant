@@ -1,0 +1,12 @@
+{
+  "bernina-winter": { "src": "../images/bernina-winter.jpg", "alt": "Red train crossing a snowy pass", "focus": "50% 50%", "tags": ["train", "winter", "mountains", "panorama"] },
+  "bernina-summer": { "src": "../images/bernina-summer.jpg", "alt": "Bernina Express on a stone viaduct", "focus": "50% 50%", "tags": ["train", "summer", "viaduct", "forest"] },
+  "skitour-monterosa": { "src": "../images/skitour-monterosa.jpg", "alt": "Three ski tourers on a ridge", "focus": "60% 40%", "tags": ["winter", "hiking", "people", "hero"] },
+  "hiker-alps": { "src": "../images/hiker-alps.jpg", "alt": "Hiker with poles on a rocky trail", "focus": "50% 40%", "tags": ["hiking", "summer", "people"] },
+  "cyclists-road": { "src": "../images/cyclists-road.jpg", "alt": "Three cyclists on a country road", "focus": "50% 50%", "tags": ["cycling", "summer", "people"] },
+  "meadow-evening": { "src": "../images/meadow-evening.jpg", "alt": "Walkers in an alpine meadow at sunset", "focus": "50% 60%", "tags": ["hiking", "summer", "landscape"] },
+  "summit-cloud": { "src": "../images/summit-cloud.jpg", "alt": "Two walkers on a green summit under one cloud", "focus": "50% 55%", "tags": ["hiking", "summer", "summit", "hero"] },
+  "goldenpass-autumn": { "src": "../images/goldenpass-autumn.jpg", "alt": "Gornergrat train below the Matterhorn", "focus": "50% 50%", "tags": ["train", "autumn", "matterhorn"] },
+  "dining-car": { "src": "../images/dining-car.jpg", "alt": "Historic panoramic dining car interior", "focus": "50% 50%", "tags": ["train", "interior", "dining"] },
+  "langwies-night": { "src": "../images/langwies-night.jpg", "alt": "Illuminated viaduct in a snowy forest at night", "focus": "50% 50%", "tags": ["winter", "night", "viaduct"] }
+}

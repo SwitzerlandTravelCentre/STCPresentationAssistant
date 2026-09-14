@@ -1,0 +1,128 @@
+/* ---------------------------------------------------------------
+   The ten approved layouts. Geometry only — colour and type come
+   from tokens.css. Every horizontal position is a multiple of the
+   6 column grid, except the hero cards which use --bleed.
+   --------------------------------------------------------------- */
+
+/* Column helper: n columns wide, starting at column s (1-based). */
+.grid {
+  position: absolute;
+  left: var(--margin); right: var(--margin);
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  column-gap: var(--gutter);
+}
+
+.title-block {
+  position: absolute;
+  left: var(--margin);
+  top: var(--title-top);
+  width: calc(4 * var(--col) + 3 * var(--gutter));
+}
+.title-block .subline { margin-top: 14px; }
+
+/* =============== L1 — opening title on photograph =============== */
+.L1 .hero {
+  position: absolute; left: var(--bleed); right: var(--bleed);
+  top: 118px; height: 403px;
+  border-radius: var(--radius); overflow: hidden;
+}
+.L1 .hero-text {
+  position: absolute; left: 53px; top: 156px;
+  width: calc(4 * var(--col) + 3 * var(--gutter));
+}
+.L1 .hero-text .headline { font-size: 40px; line-height: 45px; }
+.L1 .hero-text .subline  { margin-top: 16px; font-size: 21px; line-height: 24px; font-weight: 400; }
+
+/* =============== L2 — chapter, colour field + photo ============= */
+.L2 .pair {
+  position: absolute; left: var(--bleed); right: var(--bleed);
+  top: 118px; height: 400px;
+  display: grid; grid-template-columns: 1fr 1fr; column-gap: var(--gutter);
+}
+.L2 .field {
+  border-radius: var(--radius);
+  padding: 40px 44px;
+}
+.L2 .field .headline { font-size: 36px; line-height: 41px; }
+.L2 .field .copy { margin-top: 20px; }
+.L2 .shot { border-radius: var(--radius); overflow: hidden; }
+
+/* =============== L6 — agenda =================================== */
+.L6 .agenda { top: 150px; bottom: 70px; }
+.L6 .agenda ol { grid-column: 1 / 7; list-style: none; margin: 0; padding: 0; }
+.L6 .agenda li {
+  display: flex; gap: 14px; align-items: baseline;
+  padding: 11px 0;
+  border-bottom: 1px solid var(--stone-light);
+}
+.L6 .agenda li:last-child { border-bottom: 0; }
+.L6 .agenda .idx  { width: 22px; flex: none; }
+.L6 .agenda .what { flex: 1; }
+.L6 .agenda .when { flex: none; font-variant-numeric: tabular-nums; }
+.L6 .agenda li.break .what { font-style: normal; color: var(--stone); }
+
+/* =============== L8 — text heavy, two columns =================== */
+.L8 .cols { top: var(--body-top); bottom: 74px; }
+.L8 .cols .col-a { grid-column: 1 / 4; }
+.L8 .cols .col-b { grid-column: 4 / 7; }
+
+/* =============== L11 — text plus two photographs ================ */
+.L11 .body { top: 55px; bottom: 78px; }
+.L11 .body .col-a,
+.L11 .body .col-b { padding-top: 115px; }
+.L11 .body .col-a { grid-column: 1 / 3; }
+.L11 .body .col-b { grid-column: 3 / 5; }
+.L11 .body .shots {
+  grid-column: 5 / 7;
+  display: grid; grid-template-rows: 1fr 1fr; row-gap: var(--gutter);
+}
+
+/* =============== L13 — bullets plus one tall photograph ========= */
+.L13 .body { top: 55px; bottom: 78px; }
+.L13 .body .list { grid-column: 1 / 4; padding-top: 118px; }
+.L13 .body .shot { grid-column: 4 / 7; }
+
+/* =============== L14 — photograph left, longer list right ======= */
+.L14 .body { top: var(--body-top); bottom: 78px; }
+.L14 .body .shot { grid-column: 1 / 4; }
+.L14 .body .list { grid-column: 4 / 7; }
+
+/* =============== L15 — chapter on a plain colour field ========== */
+.L15 .field {
+  position: absolute; left: var(--bleed); right: var(--bleed);
+  top: 24px; height: 439px;
+  border-radius: var(--radius);
+  padding: 42px 60px;
+}
+.L15 .field .headline { font-size: 40px; line-height: 45px; }
+.L15 .field .subline  { margin-top: 16px; font-weight: 400; font-size: 21px; }
+
+/* =============== L18 — data, the flexible one =================== */
+.L18 .body { top: var(--body-top); bottom: 74px; }
+.L18 .body .main { grid-column: 1 / 5; }
+.L18 .body .main.full { grid-column: 1 / 7; }
+.L18 .body .side { grid-column: 5 / 7; display: flex; flex-direction: column; gap: 12px; }
+.L18 .body .side .shot { height: 118px; flex: none; }
+.L18 .body .side .subline { font-size: 21px; line-height: 24px; }
+.L18 .body .side .cta-button { align-self: flex-start; margin-top: auto; }
+
+.data-table { width: 100%; border-collapse: collapse; font-size: var(--small-size); line-height: var(--small-lh); }
+.data-table th {
+  background: var(--sun); text-align: left; font-weight: 700;
+  padding: 7px 9px; vertical-align: bottom;
+}
+.data-table td { padding: 6px 9px; border-bottom: 1px solid var(--stone-light); }
+.data-table td.num, .data-table th.num { text-align: right; font-variant-numeric: tabular-nums; }
+.data-table tr:last-child td { border-bottom: 0; font-weight: 700; }
+
+.bar-chart { display: flex; align-items: flex-end; gap: 14px; height: 210px; }
+.bar-chart .bar-group { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 6px; height: 100%; justify-content: flex-end; }
+.bar-chart .bar { width: 100%; border-radius: var(--radius-sm) var(--radius-sm) 0 0; }
+.bar-chart .bar-label { font-size: var(--small-size); line-height: var(--small-lh); }
+
+/* =============== L22 — closing ================================== */
+.L22 .closing { position: absolute; left: var(--margin); top: 150px; width: calc(5 * var(--col) + 4 * var(--gutter)); }
+.L22 .closing .headline { font-size: 36px; line-height: 41px; }
+.L22 .closing .address { margin-top: 48px; }
+.L22 .closing .address .copy { margin-bottom: 0; }

@@ -1,0 +1,14 @@
+{
+  "name": "stc-deck",
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "lint": "node src/lint.js",
+    "render": "node src/render.js",
+    "build": "node src/lint.js decks/example.json && node src/render.js decks/example.json dist/index.html",
+    "pdf": "node src/export.js dist/index.html dist/deck.pdf"
+  },
+  "devDependencies": {
+    "playwright": "^1.63.0"
+  }
+}

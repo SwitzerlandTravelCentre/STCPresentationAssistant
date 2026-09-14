@@ -1,0 +1,199 @@
+/* ---------------------------------------------------------------
+   Switzerland Travel Centre — design tokens
+   Derived from DesignGuidelines.pdf. Do not edit to fix a single
+   slide; fix the slide. This file is the contract.
+   --------------------------------------------------------------- */
+
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;700&display=swap');
+
+:root {
+  /* --- canvas -------------------------------------------------- */
+  /* 960 x 540 px == the 16:9 slide in points, so every size below
+     matches the PDF spec 1:1 (headline 32 pt == 32 px here).       */
+  --slide-w: 960px;
+  --slide-h: 540px;
+
+  /* --- 6 column grid ------------------------------------------- */
+  --margin: 51px;          /* outer margin, left and right          */
+  --gutter: 22px;          /* between columns                       */
+  --col: 124.67px;         /* 6*col + 5*gutter + 2*margin = 960      */
+  --bleed: 24px;           /* wider inset used by hero photo cards   */
+  --body-top: 170px;       /* first baseline of body content              */
+  --title-top: 62px;       /* cap height of the headline                   */
+
+  /* --- type ----------------------------------------------------- */
+  --font: 'Lexend', 'Helvetica Neue', Arial, sans-serif;
+  --headline-size: 32px;   --headline-lh: 36px;
+  --subline-size: 24px;    --subline-lh: 27px;
+  --copy-size: 17px;       --copy-lh: 20px;
+  --small-size: 13px;      --small-lh: 16px;
+  --footer-size: 9px;      --footer-lh: 12px;
+
+  /* --- palette -------------------------------------------------- */
+  --sun: #ffdb5c;          --sun-light: #fff1be;
+  --berry: #f29fc5;        --berry-light: #fad9e8;
+  --forest: #49b170;       --forest-light: #b6e0c6;
+  --water: #477ec0;        --water-light: #b5cbe5;
+  --stone: #4f5c69;        --stone-medium: #aeb8c2;
+  --stone-light: #e8ebed;
+  --black: #000000;
+  --white: #ffffff;
+  --cta: #e2001a;          /* button red, from the sample use cases */
+
+  /* --- shape ---------------------------------------------------- */
+  --radius: 16px;
+  --radius-sm: 10px;
+}
+
+/* Colour fields. Only water, stone and black carry white type. */
+.bg-sun          { background: var(--sun);          color: var(--black); }
+.bg-sun-light    { background: var(--sun-light);    color: var(--black); }
+.bg-berry        { background: var(--berry);        color: var(--black); }
+.bg-berry-light  { background: var(--berry-light);  color: var(--black); }
+.bg-forest       { background: var(--forest);       color: var(--black); }
+.bg-forest-light { background: var(--forest-light); color: var(--black); }
+.bg-water-light  { background: var(--water-light);  color: var(--black); }
+.bg-stone-light  { background: var(--stone-light);  color: var(--black); }
+.bg-stone-medium { background: var(--stone-medium); color: var(--black); }
+.bg-water        { background: var(--water);        color: var(--white); }
+.bg-stone        { background: var(--stone);        color: var(--white); }
+.bg-black        { background: var(--black);        color: var(--white); }
+
+/* --- base type ------------------------------------------------- */
+* { box-sizing: border-box; }
+
+.slide {
+  position: relative;
+  width: var(--slide-w);
+  height: var(--slide-h);
+  overflow: hidden;
+  background: var(--white);
+  color: var(--black);
+  font-family: var(--font);
+  font-weight: 400;
+  font-size: var(--copy-size);
+  line-height: var(--copy-lh);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Headlines and sublines are Medium and never bold (guideline p.4). */
+.headline {
+  font-size: var(--headline-size);
+  line-height: var(--headline-lh);
+  font-weight: 500;
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+.subline {
+  font-size: var(--subline-size);
+  line-height: var(--subline-lh);
+  font-weight: 500;
+  margin: 0;
+}
+.copy   { font-size: var(--copy-size);  line-height: var(--copy-lh);  margin: 0 0 var(--copy-lh) 0; }
+.copy:last-child { margin-bottom: 0; }
+.copy.is-small {
+  font-size: var(--small-size); line-height: var(--small-lh);
+  margin-bottom: var(--small-lh);
+}
+.small  { font-size: var(--small-size); line-height: var(--small-lh); }
+
+/* Highlights are bold; that is the only permitted bold in body text. */
+.copy b, .copy strong, .small b, .small strong { font-weight: 700; }
+
+/* Links stay black and underlined. */
+.slide a { color: inherit; text-decoration: underline; text-underline-offset: 2px; }
+
+/* --- bulleted lists -------------------------------------------- */
+ul.bullets { list-style: none; margin: 0; padding: 0; }
+ul.bullets li {
+  position: relative;
+  padding-left: 21px;
+  margin-bottom: var(--copy-lh);
+}
+ul.bullets li:last-child { margin-bottom: 0; }
+ul.bullets li::before { content: '•'; position: absolute; left: 0; }
+ul.bullets.small li { padding-left: 16px; margin-bottom: var(--small-lh); }
+
+/* --- images ----------------------------------------------------- */
+.photo {
+  width: 100%; height: 100%;
+  border-radius: var(--radius);
+  object-fit: cover;
+  display: block;
+}
+.photo-missing {
+  display: flex; align-items: center; justify-content: center;
+  width: 100%; height: 100%;
+  border-radius: var(--radius);
+  background: var(--stone-light);
+  color: var(--stone);
+  font-size: var(--small-size);
+  outline: 1px dashed var(--stone-medium);
+  outline-offset: -1px;
+}
+
+/* --- CTA button -------------------------------------------------- */
+.cta-button {
+  display: inline-block;
+  background: var(--cta); color: var(--white);
+  font-size: var(--copy-size); line-height: 1;
+  padding: 9px 14px; border-radius: 999px;
+  text-decoration: none;
+}
+
+/* --- footer and logo --------------------------------------------- */
+.slide-footer {
+  position: absolute; left: var(--margin); right: var(--margin); bottom: 20px;
+  display: flex; align-items: center;
+  font-size: var(--footer-size); line-height: var(--footer-lh);
+  white-space: nowrap;            /* footer stays single-line */
+}
+.slide-footer .pagenum { width: 60px; }
+.slide-footer .footer-text {
+  flex: 1; text-align: center; overflow: hidden; text-overflow: ellipsis;
+}
+.slide-footer .spacer { width: 60px; }
+
+.badge {
+  position: absolute; right: 26px; bottom: 22px; width: 32px; height: 32px;
+  background: var(--logo-icon) center / contain no-repeat;
+}
+
+/* Logo lockup. If images/logo-lockup.svg exists it is used whole;
+   otherwise the supplied icon is set beside a Lexend wordmark. */
+.logo { position: absolute; right: var(--bleed); top: 24px; height: 66px; }
+.logo-image { width: 200px; background: var(--logo-lockup) right top / contain no-repeat; }
+.logo-lockup {
+  position: absolute; right: var(--bleed); top: 24px;
+  display: flex; align-items: flex-start; gap: 10px;
+}
+.logo-lockup .mark {
+  width: 42px; height: 42px; margin-top: 2px; flex: none;
+  background: var(--logo-icon) center / contain no-repeat;
+}
+.logo-lockup .type { display: flex; flex-direction: column; }
+.logo-lockup .type span {
+  font-size: 19px; line-height: 21px; font-weight: 500; letter-spacing: -0.01em;
+}
+.logo-lockup .type em {
+  font-style: normal; font-size: 9px; line-height: 14px; font-weight: 700;
+  text-align: right; margin-top: 2px;
+}
+
+/* Stand-in shown when a manifest entry has no file on disk yet.
+   Keeps the composition readable during authoring. */
+.photo-placeholder {
+  position: relative;
+  width: 100%; height: 100%;
+  border-radius: var(--radius);
+  display: flex; align-items: flex-end;
+  padding: 14px;
+  font-size: var(--small-size); line-height: var(--small-lh);
+  color: var(--stone);
+}
+.photo-placeholder::after {
+  content: ''; position: absolute; inset: 0;
+  border-radius: var(--radius);
+  outline: 1px dashed var(--stone-medium); outline-offset: -1px;
+}

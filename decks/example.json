@@ -1,0 +1,122 @@
+{
+  "title": "Gran Train Tour 2026 — partner briefing",
+  "lang": "en",
+  "footer": "Partner briefing 2026 · Switzerland Travel Centre AG · internal",
+  "slides": [
+    {
+      "layout": "L1",
+      "title": "Gran Train Tour 2026",
+      "subline": "Partner briefing, Zürich",
+      "image": "skitour-monterosa"
+    },
+    {
+      "layout": "L6",
+      "title": "Agenda",
+      "items": [
+        { "label": "Welcome", "time": "09:00 – 10:00" },
+        { "label": "Workshop: travelling in Switzerland", "time": "10:00 – 11:00" },
+        { "label": "The railway journey as an adventure", "time": "11:00 – 12:00" },
+        { "label": "Lunch in the dining car", "time": "12:00 – 14:00", "break": true },
+        { "label": "What the future holds", "time": "14:00 – 15:00" },
+        { "label": "Partner placements", "time": "15:00 – 16:00" },
+        { "label": "Open questions and next steps", "time": "16:00 – 17:00" }
+      ]
+    },
+    {
+      "layout": "L2",
+      "title": "Where we stand today",
+      "body": [
+        "Bookings have returned to pre-2020 volume in every European market, but the shape of demand has changed. Shorter trips, later decisions, and far more mobile."
+      ],
+      "image": "bernina-summer",
+      "color": "sun-light"
+    },
+    {
+      "layout": "L13",
+      "title": "Rail is winning the long weekend",
+      "bullets": [
+        "Three-day trips up 18% year on year",
+        "Booking window has shortened to 21 days",
+        "Half of all bookings now start on a phone",
+        "Panoramic routes sell out first",
+        "Winter demand now spills into March"
+      ],
+      "image": "bernina-winter"
+    },
+    {
+      "layout": "L14",
+      "title": "What the numbers tell us about products",
+      "bullets": [
+        "Panoramic Roundtrip stays the anchor product at 8 days and 7 nights",
+        "**Gran Train Tour** outsells every other package in the UK market",
+        "Group bookings recovered to 2019 levels in Zürich and Stuttgart",
+        "Hong Kong remains below plan and needs a separate campaign",
+        "London recovered fastest once direct rail connections returned"
+      ],
+      "image": "dining-car"
+    },
+    {
+      "layout": "L8",
+      "title": "How partners actually sell us",
+      "left": [
+        "Agents rarely sell a route. They sell a picture of a day: a window seat, a pass, and something warm at the end of it. The itinerary matters less than the promise that nothing will need to be organised on arrival.",
+        "That is why the packages that travel best are the ones with the fewest decisions left open."
+      ],
+      "right": [
+        "The counter-argument we hear most often is price. In practice the objection is rarely the total; it is the absence of a comparison. When a partner can put the rail package beside the equivalent self-drive week, the conversation ends quickly.",
+        "Our job for 2026 is to supply that comparison, in the partner's own language, before they are asked for it."
+      ]
+    },
+    {
+      "layout": "L18",
+      "title": "Booking volume by market",
+      "chart": {
+        "series": [
+          { "label": "2018", "value": 55226, "display": "55’226", "color": "water-light" },
+          { "label": "2019", "value": 53764, "display": "53’764", "color": "water-light" },
+          { "label": "2020", "value": 23456, "display": "23’456", "color": "stone-medium" },
+          { "label": "2021", "value": 28607, "display": "28’607", "color": "stone-medium" },
+          { "label": "2022", "value": 49082, "display": "49’082", "color": "water" }
+        ],
+        "caption": "Zürich, booking volume in CHF x 1000, consolidated at budget rate"
+      },
+      "side": {
+        "image": "goldenpass-autumn",
+        "heading": "GoldenPass Tour",
+        "body": [
+          "The autumn window is the only period where all three panoramic routes run at full length on the same day. It carries the highest margin of the year."
+        ],
+        "cta": { "label": "to the panoramic journey", "href": "https://switzerlandtravelcentre.com" }
+      }
+    },
+    {
+      "layout": "L15",
+      "title": "What the future holds",
+      "subline": "Three shifts we are planning around",
+      "color": "forest-light"
+    },
+    {
+      "layout": "L11",
+      "title": "Two ways people travel with us",
+      "left": [
+        "The first group buys a route. They know the Bernina line by name, they book eleven weeks out, and they read the timetable before they read the price."
+      ],
+      "right": [
+        "The second group buys a week off. They arrive through a partner, they decide late, and they want one confirmation email that covers everything."
+      ],
+      "images": ["cyclists-road", "meadow-evening"]
+    },
+    {
+      "layout": "L13",
+      "title": "What we need from you by March",
+      "bullets": [
+        "Confirm your 2026 allotment by 14 March",
+        "Send local copy for the spring newsletter",
+        "Nominate one contact for group requests",
+        "Flag any route you cannot sell this year"
+      ],
+      "image": "summit-cloud"
+    },
+    { "layout": "L22" }
+  ]
+}
