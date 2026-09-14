@@ -4,7 +4,7 @@
 
 import fs from 'node:fs';
 import path from 'node:path';
-import { fileURLToPath } from 'node:url';
+import { fileURLToPath, pathToFileURL } from 'node:url';
 import { renderDeck } from './render.js';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
@@ -23,6 +23,16 @@ const LIMITS = {
   L6:  { items: 9 },
   L18: { sideHeading: 40, sideChars: 180, bars: 8, rows: 8 },
   footerChars: 120,
+};
+
+const EFFECTS = new Set(['none', 'fade', 'fade-up', 'slide-left', 'scale']);
+const REVEALS = new Set(['none', 'bullets']);
+const PHOTO_EFFECTS = new Set(['none', 'slow-zoom', false]);
+
+const textOf = (value = '') => {
+  if (!value || typeof value !== 'object') return value || '';
+  const more = value.more ?? value.expand ?? value.details ?? '';
+  return [value.text ?? value.label ?? '', Array.isArray(more) ? more.join(' ') : more].filter(Boolean).join(' ');
 };
 
 export function lintDeck(deck, images) {
@@ -49,8 +59,18 @@ export function lintDeck(deck, images) {
   }
 
   const words = (v) => (Array.isArray(v) ? v.join(' ') : v || '').split(/\s+/).filter(Boolean).length;
+  const wordsIn = (v) => (Array.isArray(v) ? v.map(textOf).join(' ') : textOf(v)).split(/\s+/).filter(Boolean).length;
+  const charsIn = (v) => (Array.isArray(v) ? v.map(textOf).join(' ') : textOf(v)).length;
+
+  if (deck.effect && !EFFECTS.has(deck.effect)) errors.push(`"${deck.effect}" is not a supported deck effect`);
+  if (deck.reveal && !REVEALS.has(deck.reveal)) errors.push(`"${deck.reveal}" is not a supported deck reveal mode`);
+  if (deck.photoEffect !== undefined && !PHOTO_EFFECTS.has(deck.photoEffect)) errors.push(`"${deck.photoEffect}" is not a supported deck photo effect`);
 
   s.forEach((sl, i) => {
+    if (sl.effect && !EFFECTS.has(sl.effect)) at(i, `"${sl.effect}" is not a supported effect`);
+    if (sl.reveal && !REVEALS.has(sl.reveal)) at(i, `"${sl.reveal}" is not a supported reveal mode`);
+    if (sl.photoEffect !== undefined && !PHOTO_EFFECTS.has(sl.photoEffect)) at(i, `"${sl.photoEffect}" is not a supported photo effect`);
+
     if (sl.title && sl.title.length > LIMITS.titleChars)
       at(i, `title is ${sl.title.length} chars, over ${LIMITS.titleChars} — would exceed 2 lines`);
     if (sl.title && /\*\*/.test(sl.title))
@@ -68,20 +88,21 @@ export function lintDeck(deck, images) {
         if (!b.length) at(i, 'no bullets');
         if (b.length > L.bullets) at(i, `${b.length} bullets, max ${L.bullets} — split the slide or use L8`);
         b.forEach((t, j) => {
-          if (t.replace(/\*\*/g, '').length > L.chars)
-            at(i, `bullet ${j + 1} is ${t.length} chars, max ${L.chars}`);
+          const text = textOf(t);
+          if (text.replace(/\*\*/g, '').length > L.chars)
+            at(i, `bullet ${j + 1} is ${text.length} chars, max ${L.chars}`);
         });
         if (!sl.image) at(i, 'needs an image');
         break;
       }
       case 'L8': {
-        const w = words(sl.left) + words(sl.right);
+        const w = wordsIn(sl.left) + wordsIn(sl.right);
         if (w > LIMITS.L8.words) at(i, `${w} words, max ${LIMITS.L8.words} — split into two slides`);
         if (!sl.left || !sl.right) at(i, 'both columns must be filled — single wide text column is not permitted');
         break;
       }
       case 'L11': {
-        const w = words(sl.left) + words(sl.right);
+        const w = wordsIn(sl.left) + wordsIn(sl.right);
         if (w > LIMITS.L11.words) at(i, `${w} words, max ${LIMITS.L11.words}`);
         if ((sl.images || []).length !== 2) at(i, 'L11 needs exactly two images');
         break;
@@ -91,7 +112,7 @@ export function lintDeck(deck, images) {
         const side = sl.side || {};
         if (side.heading && side.heading.length > L.sideHeading)
           at(i, `side heading is ${side.heading.length} chars, max ${L.sideHeading}`);
-        const chars = (Array.isArray(side.body) ? side.body.join(' ') : side.body || '').length;
+        const chars = charsIn(side.body);
         if (chars > L.sideChars)
           at(i, `side text is ${chars} chars, max ${L.sideChars} — the panel would push the button off the slide`);
         if (sl.chart && sl.chart.series.length > L.bars)
@@ -118,7 +139,7 @@ export function lintDeck(deck, images) {
   return { errors, warns };
 }
 
-if (import.meta.url === `file://${process.argv[1]}`) {
+if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
   const deck = read(process.argv[2] || 'decks/example.json');
   const { errors, warns } = lintDeck(deck, read('images/manifest.json'));
   warns.forEach((w) => console.warn('warn ', w));

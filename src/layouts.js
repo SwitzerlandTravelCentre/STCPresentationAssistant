@@ -9,11 +9,33 @@ const esc = (s = '') =>
 /* Only **bold** is allowed inside copy — highlights per guideline p.4. */
 const rich = (s = '') => esc(s).replace(/\*\*(.+?)\*\*/g, '<b>$1</b>');
 
+const textParts = (value = '') => {
+  if (!value || typeof value !== 'object') return { text: value, more: '' };
+  return {
+    text: value.text ?? value.label ?? '',
+    more: value.more ?? value.expand ?? value.details ?? '',
+  };
+};
+
+const expandMore = (more = '') => {
+  if (!more) return '';
+  const text = Array.isArray(more) ? more.join(' ') : more;
+  return ` <span class="text-more">${rich(text)}</span>`;
+};
+
 const paras = (arr = [], cls = '') =>
-  (Array.isArray(arr) ? arr : [arr]).map((t) => `<p class="copy ${cls}">${rich(t)}</p>`).join('');
+  (Array.isArray(arr) ? arr : [arr]).map((t) => {
+    const parts = textParts(t);
+    const hasMore = parts.more ? ' has-more' : '';
+    return `<p class="copy ${cls}${hasMore}">${rich(parts.text)}${expandMore(parts.more)}</p>`;
+  }).join('');
 
 const bullets = (items = [], cls = '') =>
-  `<ul class="bullets ${cls}">${items.map((b) => `<li>${rich(b)}</li>`).join('')}</ul>`;
+  `<ul class="bullets ${cls}">${items.map((b) => {
+    const parts = textParts(b);
+    const hasMore = parts.more ? ' class="has-more"' : '';
+    return `<li${hasMore}>${rich(parts.text)}${expandMore(parts.more)}</li>`;
+  }).join('')}</ul>`;
 
 /* Images are resolved against images/manifest.json. An unknown id
    renders as a visible placeholder and is reported by the linter. */

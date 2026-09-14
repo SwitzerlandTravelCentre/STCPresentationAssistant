@@ -2,6 +2,8 @@
   "title": "Gran Train Tour 2026 — partner briefing",
   "lang": "en",
   "footer": "Partner briefing 2026 · Switzerland Travel Centre AG · internal",
+  "effect": "fade-up",
+  "photoEffect": "slow-zoom",
   "slides": [
     {
       "layout": "L1",
@@ -64,7 +66,10 @@
       ],
       "right": [
         "The counter-argument we hear most often is price. In practice the objection is rarely the total; it is the absence of a comparison. When a partner can put the rail package beside the equivalent self-drive week, the conversation ends quickly.",
-        "Our job for 2026 is to supply that comparison, in the partner's own language, before they are asked for it."
+        {
+          "text": "Our job for 2026 is to supply that comparison, in the partner's own language, before they are asked for it.",
+          "more": "Presenter preview starts this detail faintly; click or press T to make expandable text fully visible."
+        }
       ]
     },
     {

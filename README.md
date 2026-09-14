@@ -46,6 +46,45 @@ The linter is the fast gate: character and word budgets per layout, deck
 structure, brand colours. The PDF step is the slow gate: it measures the
 real rendered boxes in Chromium and fails if anything overflows its slide.
 
+## Preview effects
+
+Rendered HTML opens in presenter mode with preview-only effects. Click,
+Space, ArrowRight, or the Next control advances bullet reveals first, then
+moves to the next slide. ArrowLeft goes back. Use `F` for fullscreen, `O`
+for overview, `R` to reset the current slide, and `T` to expand text.
+
+PDF and print output ignore the preview runtime: every slide is rendered
+at 960 x 540 px with all bullets and expandable text fully visible.
+
+Decks can set defaults at the top level, and any slide can override them:
+
+```json
+{
+  "effect": "fade-up",
+  "photoEffect": "slow-zoom",
+  "slides": [
+    {
+      "layout": "L13",
+      "title": "Rail is winning the long weekend",
+      "reveal": "bullets",
+      "photoEffect": "none",
+      "bullets": [
+        "Three-day trips up 18% year on year",
+        {
+          "text": "Panoramic routes sell out first",
+          "more": "Expanded presenter note that starts faint and becomes fully visible."
+        }
+      ],
+      "image": "bernina-winter"
+    }
+  ]
+}
+```
+
+Supported slide entrance effects are `none`, `fade`, `fade-up`,
+`slide-left`, and `scale`. Supported reveal modes are `none` and `bullets`.
+Supported photo effects are `none` and `slow-zoom`.
+
 ## Canvas
 
 960 × 540 px, which is the 16:9 slide in points. Every size from the

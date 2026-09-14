@@ -16,6 +16,18 @@ const page = await browser.newPage({ viewport: { width: 1100, height: 900 } });
 await page.goto(pathToFileURL(htmlPath).href, { waitUntil: 'networkidle' });
 await page.evaluate(() => document.fonts.ready);
 
+await page.evaluate(() => {
+  document.body.classList.remove('presenter-mode');
+  document.body.classList.add('overview-mode');
+  document.querySelectorAll('.frame').forEach((frame) => {
+    frame.style.display = 'block';
+  });
+  document.querySelectorAll('.slide').forEach((slide) => {
+    slide.classList.add('is-active', 'is-expanded');
+    slide.querySelectorAll('.bullets li').forEach((item) => item.classList.add('is-revealed'));
+  });
+});
+
 /* Anything that sticks out of its slide box is a layout failure.
    Elements that are meant to bleed are excluded by class.        */
 const overflows = await page.evaluate(() => {
