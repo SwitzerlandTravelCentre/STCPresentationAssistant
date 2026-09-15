@@ -24,6 +24,11 @@ Drop your photographs in `images/` and list them in
 `images/manifest.json`. Any id without a file on disk renders as a
 tinted placeholder, so you can author before the assets arrive.
 
+Default images can live in `images/defaults/`. Add `"default": true` and
+strong `tags` in `images/manifest.json`; if a slide needs an image but no
+`image` id is set, the renderer compares the slide title/body/bullets with
+those tags and picks the closest default image.
+
 The logo icon (`images/logo-icon.png`) is the real asset and is inlined
 as a data URI, so `dist/*.html` stays portable. The top-right lockup is
 currently the icon set beside a Lexend wordmark. If you have the

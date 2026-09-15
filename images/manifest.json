@@ -1,12 +1,132 @@
 {
-  "bernina-winter": { "src": "../images/bernina-winter.jpg", "alt": "Red train crossing a snowy pass", "focus": "50% 50%", "tags": ["train", "winter", "mountains", "panorama"] },
-  "bernina-summer": { "src": "../images/bernina-summer.jpg", "alt": "Bernina Express on a stone viaduct", "focus": "50% 50%", "tags": ["train", "summer", "viaduct", "forest"] },
-  "skitour-monterosa": { "src": "../images/skitour-monterosa.jpg", "alt": "Three ski tourers on a ridge", "focus": "60% 40%", "tags": ["winter", "hiking", "people", "hero"] },
-  "hiker-alps": { "src": "../images/hiker-alps.jpg", "alt": "Hiker with poles on a rocky trail", "focus": "50% 40%", "tags": ["hiking", "summer", "people"] },
-  "cyclists-road": { "src": "../images/cyclists-road.jpg", "alt": "Three cyclists on a country road", "focus": "50% 50%", "tags": ["cycling", "summer", "people"] },
-  "meadow-evening": { "src": "../images/meadow-evening.jpg", "alt": "Walkers in an alpine meadow at sunset", "focus": "50% 60%", "tags": ["hiking", "summer", "landscape"] },
-  "summit-cloud": { "src": "../images/summit-cloud.jpg", "alt": "Two walkers on a green summit under one cloud", "focus": "50% 55%", "tags": ["hiking", "summer", "summit", "hero"] },
-  "goldenpass-autumn": { "src": "../images/goldenpass-autumn.jpg", "alt": "Gornergrat train below the Matterhorn", "focus": "50% 50%", "tags": ["train", "autumn", "matterhorn"] },
-  "dining-car": { "src": "../images/dining-car.jpg", "alt": "Historic panoramic dining car interior", "focus": "50% 50%", "tags": ["train", "interior", "dining"] },
-  "langwies-night": { "src": "../images/langwies-night.jpg", "alt": "Illuminated viaduct in a snowy forest at night", "focus": "50% 50%", "tags": ["winter", "night", "viaduct"] }
+  "bernina-winter": {
+    "src": "../images/defaults/BerninaExpress-TrainAlpGruem.png",
+    "alt": "Bernina Express train in the Alps near Alp Grum",
+    "focus": "52% 48%",
+    "tags": ["train", "winter", "mountains", "alps", "panorama", "bernina"]
+  },
+  "bernina-summer": {
+    "src": "../images/defaults/BerninaExpress-Train.jpg",
+    "alt": "Bernina Express crossing an alpine stone bridge",
+    "focus": "54% 52%",
+    "tags": ["train", "summer", "viaduct", "forest", "mountains", "bernina"]
+  },
+  "skitour-monterosa": {
+    "src": "../images/defaults/HeroImagePeopleHikingInSnow.jpg",
+    "alt": "People hiking through a snowy alpine landscape",
+    "focus": "50% 45%",
+    "tags": ["winter", "snow", "hiking", "people", "hero", "mountains"]
+  },
+  "hiker-alps": {
+    "src": "../images/defaults/HikingOnAHill.jpg",
+    "alt": "Hiker on a green alpine hill",
+    "focus": "50% 45%",
+    "tags": ["hiking", "summer", "people", "mountains", "hill", "outdoor"]
+  },
+  "cyclists-road": {
+    "src": "../images/defaults/PeopleHikingGrasSommer.jpg",
+    "alt": "People hiking through green summer grass",
+    "focus": "50% 50%",
+    "tags": ["hiking", "summer", "people", "grass", "outdoor"]
+  },
+  "meadow-evening": {
+    "src": "../images/defaults/PeopleHikingGrasSommer.jpg",
+    "alt": "People walking through a green summer meadow",
+    "focus": "50% 55%",
+    "tags": ["hiking", "summer", "landscape", "people", "meadow", "grass"]
+  },
+  "summit-cloud": {
+    "src": "../images/defaults/HikingOnAHill.jpg",
+    "alt": "Green alpine hill below an open sky",
+    "focus": "50% 42%",
+    "tags": ["hiking", "summer", "summit", "hero", "hill", "mountains"]
+  },
+  "goldenpass-autumn": {
+    "src": "../images/defaults/GoldenpassTrain.png",
+    "alt": "GoldenPass train travelling through Switzerland",
+    "focus": "50% 50%",
+    "tags": ["train", "goldenpass", "panorama", "rail", "switzerland"]
+  },
+  "dining-car": {
+    "src": "../images/defaults/GlacierExpressLandwasser.png",
+    "alt": "Glacier Express crossing the Landwasser viaduct",
+    "focus": "50% 50%",
+    "tags": ["train", "glacier-express", "landwasser", "viaduct", "panorama"]
+  },
+  "langwies-night": {
+    "src": "../images/defaults/RhineGorgeGlacierExpress.png",
+    "alt": "Glacier Express route through the Rhine Gorge",
+    "focus": "50% 50%",
+    "tags": ["train", "glacier-express", "rhine-gorge", "landscape", "panorama"]
+  },
+  "default-bernina-train": {
+    "src": "../images/defaults/BerninaExpress-Train.jpg",
+    "alt": "Bernina Express crossing an alpine stone bridge",
+    "focus": "54% 52%",
+    "default": true,
+    "tags": ["default", "train", "rail", "bernina", "mountains", "summer", "panorama"]
+  },
+  "default-bernina-alp-gruem": {
+    "src": "../images/defaults/BerninaExpress-TrainAlpGruem.png",
+    "alt": "Bernina Express train in the Alps near Alp Grum",
+    "focus": "52% 48%",
+    "default": true,
+    "tags": ["default", "train", "rail", "bernina", "alp-gruem", "mountains", "winter"]
+  },
+  "default-glacier-landwasser": {
+    "src": "../images/defaults/GlacierExpressLandwasser.png",
+    "alt": "Glacier Express crossing the Landwasser viaduct",
+    "focus": "50% 50%",
+    "default": true,
+    "tags": ["default", "train", "rail", "glacier-express", "landwasser", "viaduct"]
+  },
+  "default-goldenpass-train": {
+    "src": "../images/defaults/GoldenpassTrain.png",
+    "alt": "GoldenPass train travelling through Switzerland",
+    "focus": "50% 50%",
+    "default": true,
+    "tags": ["default", "train", "rail", "goldenpass", "panorama", "switzerland"]
+  },
+  "default-snow-hiking": {
+    "src": "../images/defaults/HeroImagePeopleHikingInSnow.jpg",
+    "alt": "People hiking through a snowy alpine landscape",
+    "focus": "50% 45%",
+    "default": true,
+    "tags": ["default", "people", "hiking", "snow", "winter", "mountains", "hero"]
+  },
+  "default-hiking-hill": {
+    "src": "../images/defaults/HikingOnAHill.jpg",
+    "alt": "Hiker on a green alpine hill",
+    "focus": "50% 45%",
+    "default": true,
+    "tags": ["default", "people", "hiking", "hill", "summer", "mountains", "outdoor"]
+  },
+  "default-summer-hiking": {
+    "src": "../images/defaults/PeopleHikingGrasSommer.jpg",
+    "alt": "People hiking through green summer grass",
+    "focus": "50% 50%",
+    "default": true,
+    "tags": ["default", "people", "hiking", "summer", "grass", "outdoor", "workshop"]
+  },
+  "default-lugano-city": {
+    "src": "../images/defaults/LuganoCity.png",
+    "alt": "View of Lugano city and lake",
+    "focus": "50% 50%",
+    "default": true,
+    "tags": ["default", "city", "lugano", "lake", "ticino", "switzerland", "urban"]
+  },
+  "default-rhine-gorge": {
+    "src": "../images/defaults/RhineGorgeGlacierExpress.png",
+    "alt": "Glacier Express route through the Rhine Gorge",
+    "focus": "50% 50%",
+    "default": true,
+    "tags": ["default", "train", "rail", "glacier-express", "rhine-gorge", "landscape"]
+  },
+  "default-zurich-city": {
+    "src": "../images/defaults/ZuerichCity.png",
+    "alt": "View of Zurich city",
+    "focus": "50% 50%",
+    "default": true,
+    "tags": ["default", "city", "zurich", "business", "office", "urban", "switzerland", "ai", "workshop", "meeting", "leadership", "decision"]
+  }
 }

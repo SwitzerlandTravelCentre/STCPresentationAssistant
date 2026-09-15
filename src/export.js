@@ -21,6 +21,10 @@ await page.evaluate(() => {
   document.body.classList.add('overview-mode');
   document.querySelectorAll('.frame').forEach((frame) => {
     frame.style.display = 'block';
+    frame.style.width = '960px';
+    frame.style.height = '540px';
+    frame.style.transform = 'none';
+    frame.querySelector('.stage').style.transform = 'none';
   });
   document.querySelectorAll('.slide').forEach((slide) => {
     slide.classList.add('is-active', 'is-expanded');

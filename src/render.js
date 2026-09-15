@@ -26,6 +26,72 @@ const preset = (value, allowed, fallback) => {
   return allowed.has(value) ? value : fallback;
 };
 
+const STOPWORDS = new Set([
+  'a', 'an', 'and', 'are', 'as', 'at', 'be', 'by', 'for', 'from', 'in', 'into',
+  'is', 'it', 'of', 'on', 'or', 'our', 'the', 'this', 'to', 'with', 'within',
+  'wir', 'und', 'der', 'die', 'das', 'den', 'dem', 'ein', 'eine', 'einer', 'mit',
+  'im', 'in', 'von', 'zu', 'zur', 'zum', 'fuer', 'für',
+]);
+
+const SYNONYMS = {
+  ai: ['business', 'office', 'workshop'],
+  agent: ['business', 'office', 'workshop'],
+  agents: ['business', 'office', 'workshop'],
+  copilot: ['business', 'office', 'workshop'],
+  context: ['workshop', 'people'],
+  customer: ['business', 'office'],
+  customers: ['business', 'office'],
+  data: ['business', 'office'],
+  decision: ['business', 'office'],
+  decisions: ['business', 'office'],
+  email: ['business', 'office'],
+  exercise: ['workshop', 'people'],
+  exercises: ['workshop', 'people'],
+  leadership: ['business', 'office'],
+  meeting: ['business', 'office'],
+  prompt: ['workshop', 'business'],
+  prompts: ['workshop', 'business'],
+  train: ['rail'],
+  travel: ['train', 'rail', 'switzerland'],
+  workshop: ['people', 'business'],
+};
+
+const textFrom = (value) => {
+  if (!value) return '';
+  if (typeof value === 'string' || typeof value === 'number') return String(value);
+  if (Array.isArray(value)) return value.map(textFrom).join(' ');
+  if (typeof value === 'object') return Object.values(value).map(textFrom).join(' ');
+  return '';
+};
+
+const termsFrom = (value) => {
+  const words = textFrom(value)
+    .toLowerCase()
+    .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+    .replace(/[^a-z0-9]+/g, ' ')
+    .split(/\s+/)
+    .filter((w) => w && (w.length > 2 || w === 'ai') && !STOPWORDS.has(w));
+  const expanded = new Set(words);
+  words.forEach((word) => (SYNONYMS[word] || []).forEach((term) => expanded.add(term)));
+  return expanded;
+};
+
+export function selectDefaultImage(slide, images) {
+  const slideTerms = termsFrom(slide);
+  const candidates = Object.entries(images).filter(([, entry]) => entry.default === true);
+  let best = null;
+  for (const [id, entry] of candidates) {
+    const imageTerms = termsFrom([id, entry.alt, entry.tags]);
+    let score = 0;
+    slideTerms.forEach((term) => {
+      if (imageTerms.has(term)) score += 2;
+      else if ([...imageTerms].some((imageTerm) => imageTerm.includes(term) || term.includes(imageTerm))) score += 1;
+    });
+    if (!best || score > best.score) best = { id, score };
+  }
+  return best?.score > 0 ? best.id : candidates[0]?.[0] || null;
+}
+
 /* Brand assets become data URIs so dist/*.html is portable. Drop
    images/logo-lockup.svg in and it replaces the composed wordmark. */
 export function loadAssets() {
@@ -60,6 +126,7 @@ export function renderDeck(deck, images, assets = { icon: null, lockup: null }) 
       assets,
       page: numbered ? page++ : null,
       footerText: slide.footer ?? deck.footer ?? '',
+      pickImage: () => selectDefaultImage(slide, images),
       warn: (m) => warnings.push(`slide ${i + 1} (${slide.layout}): ${m}`),
     };
     return `<section class="slide ${slide.layout}" data-n="${i + 1}" data-layout="${attr(slide.layout)}" data-effect="${attr(effect)}" data-reveal="${attr(reveal)}" data-photo-effect="${attr(photoEffect)}">${fn(slide, ctx)}</section>`;

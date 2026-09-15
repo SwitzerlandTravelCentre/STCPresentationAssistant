@@ -12,6 +12,8 @@
   grid-template-columns: repeat(6, 1fr);
   column-gap: var(--gutter);
 }
+.grid > * { min-height: 0; }
+.shot, .shots { min-height: 0; }
 
 .title-block {
   position: absolute;
@@ -82,12 +84,12 @@
 .L13 .title-block { width: calc(3 * var(--col) + 2 * var(--gutter)); }
 .L13 .body { top: 55px; bottom: 78px; }
 .L13 .body .list { grid-column: 1 / 4; padding-top: 118px; }
-.L13 .body .shot { grid-column: 4 / 7; }
+.L13 .body .shot { grid-column: 4 / 7; border-radius: var(--radius); overflow: hidden; }
 
 /* =============== L14 — photograph left, longer list right ======= */
 .L14 .title-block { width: calc(3 * var(--col) + 2 * var(--gutter)); }
 .L14 .body { top: var(--body-top); bottom: 78px; }
-.L14 .body .shot { grid-column: 1 / 4; }
+.L14 .body .shot { grid-column: 1 / 4; border-radius: var(--radius); overflow: hidden; }
 .L14 .body .list { grid-column: 4 / 7; }
 
 /* =============== L15 — chapter on a plain colour field ========== */

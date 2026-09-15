@@ -54,8 +54,9 @@ neighbouring photograph.
 ## Phase 4 — pick images
 
 Only ids that exist in `images/manifest.json`. Match on the `tags`
-field. If nothing fits, leave `image` out and say so in your reply —
-do not invent an id.
+field. Prefer a specific image id when one clearly fits. If nothing fits,
+leave `image` out; the renderer will pick the closest entry marked
+`"default": true` from the manifest.
 
 ## Schema
 

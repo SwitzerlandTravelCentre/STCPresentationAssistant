@@ -40,6 +40,7 @@ const bullets = (items = [], cls = '') =>
 /* Images are resolved against images/manifest.json. An unknown id
    renders as a visible placeholder and is reported by the linter. */
 function photo(id, ctx) {
+  if (!id) id = ctx.pickImage?.();
   if (!id) return `<div class="photo-missing">no image</div>`;
   const entry = ctx.images[id];
   if (!entry) {
