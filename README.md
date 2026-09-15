@@ -61,7 +61,7 @@ Decks can set defaults at the top level, and any slide can override them:
 
 ```json
 {
-  "effect": "fade-up",
+  "effect": "fade",
   "photoEffect": "slow-zoom",
   "slides": [
     {

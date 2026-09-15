@@ -50,7 +50,7 @@ export function renderDeck(deck, images, assets = { icon: null, lockup: null }) 
       warnings.push(`slide ${i + 1}: unknown layout "${slide.layout}"`);
       return '';
     }
-    const effect = preset(slide.effect ?? deck.effect ?? 'fade-up', EFFECTS, 'fade-up');
+    const effect = preset(slide.effect ?? deck.effect ?? 'fade', EFFECTS, 'fade');
     const reveal = preset(slide.reveal ?? deck.reveal ?? (slide.bullets?.length ? 'bullets' : 'none'), REVEALS, 'none');
     const photoEffect = preset(slide.photoEffect ?? deck.photoEffect ?? 'slow-zoom', PHOTO_EFFECTS, 'slow-zoom');
 
@@ -109,14 +109,11 @@ ${css()}
   body.presenter-mode .frame {
     position: absolute; inset: 0;
     opacity: 0; pointer-events: none;
-    transform: translateX(28px) scale(.992);
-    transition: opacity .42s ease, transform .42s ease;
-    will-change: opacity, transform;
+    transition: opacity .42s ease;
+    will-change: opacity;
   }
-  body.presenter-mode .frame.is-before { transform: translateX(-28px) scale(.992); }
   body.presenter-mode .frame.is-current {
     opacity: 1; pointer-events: auto;
-    transform: translateX(0) scale(1);
     z-index: 2;
   }
   body.overview-mode .deck { width: auto !important; height: auto !important; }
@@ -263,15 +260,11 @@ ${slides.map((s) => `<div class="frame"><div class="stage">${s}</div></div>`).jo
     }
 
     function activate(index, options = {}) {
-      const previous = current;
       current = clamp(index);
       frames.forEach((frame, i) => {
         const slide = frame.querySelector('.slide');
         const active = overview || i === current;
         frame.classList.toggle('is-current', i === current);
-        frame.classList.toggle('is-before', i < current);
-        frame.classList.toggle('is-after', i > current);
-        frame.classList.toggle('is-leaving', i === previous && previous !== current);
         slide.classList.toggle('is-active', active);
       });
       if (options.reset) resetSlide(slideAt(current));
