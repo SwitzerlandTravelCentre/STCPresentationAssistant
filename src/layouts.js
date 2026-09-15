@@ -97,7 +97,6 @@ export const layouts = {
 
   /* Chapter opener: colour field beside a photograph. */
   L2: (s, ctx) => `
-    ${logo(ctx)}
     <div class="pair">
       <div class="field ${colorClass(s.color, 'sun-light')}">
         <h1 class="headline">${rich(s.title)}</h1>
