@@ -15,6 +15,7 @@ const read = (p) => JSON.parse(fs.readFileSync(path.resolve(root, p), 'utf8'));
    export.js is the authority. */
 const LIMITS = {
   titleChars: 60,        // headline over two lines at 32/36 across 4 columns
+  compactTitleChars: 44, // L13/L14 headline over two lines across 3 columns
   sublineChars: 90,
   L13: { bullets: 5, chars: 62 },
   L14: { bullets: 6, chars: 108 },
@@ -71,8 +72,9 @@ export function lintDeck(deck, images) {
     if (sl.reveal && !REVEALS.has(sl.reveal)) at(i, `"${sl.reveal}" is not a supported reveal mode`);
     if (sl.photoEffect !== undefined && !PHOTO_EFFECTS.has(sl.photoEffect)) at(i, `"${sl.photoEffect}" is not a supported photo effect`);
 
-    if (sl.title && sl.title.length > LIMITS.titleChars)
-      at(i, `title is ${sl.title.length} chars, over ${LIMITS.titleChars} — would exceed 2 lines`);
+    const titleLimit = ['L13', 'L14'].includes(sl.layout) ? LIMITS.compactTitleChars : LIMITS.titleChars;
+    if (sl.title && sl.title.length > titleLimit)
+      at(i, `title is ${sl.title.length} chars, over ${titleLimit} — would exceed 2 lines`);
     if (sl.title && /\*\*/.test(sl.title))
       at(i, 'headlines and sublines may not be bold');
     if (sl.subline && sl.subline.length > LIMITS.sublineChars)
