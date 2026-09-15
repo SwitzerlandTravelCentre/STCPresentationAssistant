@@ -98,12 +98,32 @@ ${css()}
   .presenter-controls button:focus-visible { background: rgba(255,255,255,.24); outline: none; }
   .presenter-controls .status { min-width: 58px; text-align: center; font: 500 12px/1 var(--font); }
   body.presenter-mode {
-    min-height: 100vh; background: #303842;
+    min-height: 100vh; overflow: hidden; background: #303842;
     display: flex; align-items: center; justify-content: center;
   }
-  body.presenter-mode .deck { min-height: 100vh; justify-content: center; gap: 0; padding: 48px 0 78px; }
-  body.presenter-mode .frame { display: none; }
-  body.presenter-mode .frame.is-current { display: block; }
+  body.presenter-mode .deck {
+    position: relative; display: block;
+    width: 960px; height: 540px;
+    gap: 0; padding: 0;
+  }
+  body.presenter-mode .frame {
+    position: absolute; inset: 0;
+    opacity: 0; pointer-events: none;
+    transform: translateX(28px) scale(.992);
+    transition: opacity .42s ease, transform .42s ease;
+    will-change: opacity, transform;
+  }
+  body.presenter-mode .frame.is-before { transform: translateX(-28px) scale(.992); }
+  body.presenter-mode .frame.is-current {
+    opacity: 1; pointer-events: auto;
+    transform: translateX(0) scale(1);
+    z-index: 2;
+  }
+  body.overview-mode .deck { width: auto !important; height: auto !important; }
+  body.overview-mode .frame {
+    position: static; opacity: 1; pointer-events: auto;
+    transform: none; transition: none;
+  }
   body.overview-mode .frame.is-current { outline: 3px solid #ffdb5c; outline-offset: 6px; }
   .js-enabled .slide[data-effect="fade"],
   .js-enabled .slide[data-effect="fade-up"],
@@ -185,6 +205,7 @@ ${slides.map((s) => `<div class="frame"><div class="stage">${s}</div></div>`).jo
     document.documentElement.classList.add('js-enabled');
 
     const frames = Array.from(document.querySelectorAll('.frame'));
+    const deck = document.querySelector('.deck');
     const controls = document.querySelector('.presenter-controls');
     const status = controls.querySelector('.status');
     let current = 0;
@@ -224,9 +245,12 @@ ${slides.map((s) => `<div class="frame"><div class="stage">${s}</div></div>`).jo
 
     function fit() {
       const presenter = document.body.classList.contains('presenter-mode');
-      const padX = presenter ? 72 : 80;
-      const padY = presenter ? 138 : 48;
-      const scale = Math.max(.25, Math.min(1, (window.innerWidth - padX) / 960, (window.innerHeight - padY) / 540));
+      const padX = presenter ? 48 : 80;
+      const padY = presenter ? 96 : 48;
+      const fitScale = Math.min((window.innerWidth - padX) / 960, (window.innerHeight - padY) / 540);
+      const scale = Math.max(.25, presenter ? fitScale : Math.min(1, fitScale));
+      deck.style.width = presenter ? (960 * scale) + 'px' : '';
+      deck.style.height = presenter ? (540 * scale) + 'px' : '';
       frames.forEach((f) => {
         f.style.width = (960 * scale) + 'px';
         f.style.height = (540 * scale) + 'px';
@@ -239,11 +263,15 @@ ${slides.map((s) => `<div class="frame"><div class="stage">${s}</div></div>`).jo
     }
 
     function activate(index, options = {}) {
+      const previous = current;
       current = clamp(index);
       frames.forEach((frame, i) => {
         const slide = frame.querySelector('.slide');
         const active = overview || i === current;
         frame.classList.toggle('is-current', i === current);
+        frame.classList.toggle('is-before', i < current);
+        frame.classList.toggle('is-after', i > current);
+        frame.classList.toggle('is-leaving', i === previous && previous !== current);
         slide.classList.toggle('is-active', active);
       });
       if (options.reset) resetSlide(slideAt(current));

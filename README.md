@@ -48,10 +48,11 @@ real rendered boxes in Chromium and fails if anything overflows its slide.
 
 ## Preview effects
 
-Rendered HTML opens in presenter mode with preview-only effects. Click,
-Space, ArrowRight, or the Next control advances bullet reveals first, then
-moves to the next slide. ArrowLeft goes back. Use `F` for fullscreen, `O`
-for overview, `R` to reset the current slide, and `T` to expand text.
+Rendered HTML opens in presenter mode with preview-only effects and scales
+the current slide to the available browser space. Click, Space, ArrowRight,
+or the Next control advances bullet reveals first, then moves to the next
+slide with a smooth transition. ArrowLeft goes back. Use `F` for fullscreen,
+`O` for overview, `R` to reset the current slide, and `T` to expand text.
 
 PDF and print output ignore the preview runtime: every slide is rendered
 at 960 x 540 px with all bullets and expandable text fully visible.
