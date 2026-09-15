@@ -37,7 +37,7 @@
 /* =============== L2 — chapter, colour field + photo ============= */
 .L2 .pair {
   position: absolute; left: var(--bleed); right: var(--bleed);
-  top: 118px; height: 400px;
+  top: 70px; height: 400px;
   display: grid; grid-template-columns: 1fr 1fr; column-gap: var(--gutter);
 }
 .L2 .field {

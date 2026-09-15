@@ -207,4 +207,4 @@ export const layouts = {
 };
 
 /* Slides that carry the logo instead of a footer, and are never numbered. */
-export const noFooter = new Set(['L1', 'L2', 'L22']);
+export const noFooter = new Set(['L1', 'L22']);
